@@ -1,0 +1,416 @@
+<?xml version="1.0"?>
+
+<!-- Lockheed Constellation 1049h        -->
+<!-- Gary R. Neely 'Buckaroo', Dec 2008  -->
+<!--
+
+Lighting control properties are passed over MP, therefore the animations
+take their cues from the MP properties rather than the source control
+properties. Here are the control to MP prop mappings as defined under
+Lockheed1049-lights.nas:
+
+var 1049H_MPNav		= props.globals.getNode("/sim/multiplay/generic/float[0]");
+var 1049H_MPTail	= props.globals.getNode("/sim/multiplay/generic/float[1]");
+var 1049H_MPTaxi	= props.globals.getNode("/sim/multiplay/generic/float[2]");
+var 1049H_MPLL		= props.globals.getNode("/sim/multiplay/generic/float[3]");
+var 1049H_MPLR		= props.globals.getNode("/sim/multiplay/generic/float[4]");
+var 1049H_MPLXL		= props.globals.getNode("/sim/multiplay/generic/float[5]");
+var 1049H_MPLXR		= props.globals.getNode("/sim/multiplay/generic/float[6]");
+var 1049H_MPCabin	= props.globals.getNode("/sim/multiplay/generic/float[7]");
+var 1049H_MPBeacon	= props.globals.getNode("/sim/multiplay/generic/float[8]");
+var 1049H_MPBeaconState	= props.globals.getNode("/sim/multiplay/generic/float[9]");
+
+-->
+
+
+<PropertyList>
+
+<path>mesh_lights.ac</path>
+
+
+<!-- Special Shaders -->
+
+<animation>
+  <type>noshadow</type>
+  <object-name>BeaconL</object-name>
+  <object-name>BeaconU</object-name>
+  <object-name>BeaconLOn</object-name>
+  <object-name>BeaconUOn</object-name>
+  <object-name>TailLight</object-name>
+  <object-name>TailLampL</object-name>
+  <object-name>TailLampLOn</object-name>
+  <object-name>TailLampU</object-name>
+  <object-name>WingtipL</object-name>
+  <object-name>WingtipR</object-name>
+  <object-name>WingtipLampL</object-name>
+  <object-name>WingtipLampR</object-name>
+  <object-name>WingtipLampLOn</object-name>
+  <object-name>WingtipLampROn</object-name>
+  <object-name>LightTaxiGlow</object-name>
+  <object-name>LightTailGlow</object-name>
+  <object-name>LightNavGlowL</object-name>
+  <object-name>LightNavGlowR</object-name>
+</animation>
+
+
+<!-- Animations -->
+
+<animation>
+  <type>select</type>
+  <object-name>BeaconLOn</object-name>
+  <object-name>BeaconUOn</object-name>
+  <object-name>LightBeaconGlow</object-name>
+  <condition>
+    <and>
+      <property>sim/multiplay/generic/float[8]</property>
+      <property>sim/multiplay/generic/float[9]</property>
+      <!--<property>sim/model/Lockheed1049H/lighting/beacon/state[0]</property>-->
+    </and>
+  </condition>
+</animation>
+
+<animation>
+  <type>select</type>
+  <object-name>TailLampLOn</object-name>
+  <condition>
+    <property>sim/multiplay/generic/float[1]</property>
+  </condition>
+</animation>
+
+<animation>
+  <type>select</type>
+  <object-name>TailLampL</object-name>
+  <condition>
+    <not><property>sim/multiplay/generic/float[1]</property></not>
+  </condition>
+</animation>
+
+<animation>
+  <type>select</type>
+  <object-name>WingtipLampLOn</object-name>
+  <object-name>WingtipLampROn</object-name>
+  <condition>
+    <property>sim/multiplay/generic/float[0]</property>
+  </condition>
+</animation>
+
+<animation>
+  <type>select</type>
+  <object-name>WingtipLampL</object-name>
+  <object-name>WingtipLampR</object-name>
+  <condition>
+    <not><property>sim/multiplay/generic/float[0]</property></not>
+  </condition>
+</animation>
+
+
+<!-- Left (red) nav light -->
+
+<animation>
+  <type>select</type>
+  <object-name>LightNavGlowL</object-name>
+  <condition>
+    <property>sim/multiplay/generic/float[0]</property>
+  </condition>
+</animation>
+
+<animation>
+  <type>flash</type>
+  <object-name>LightNavGlowL</object-name>
+  <center>
+   <x-m>-0.920</x-m>
+   <y-m>-18.850</y-m>
+   <z-m>1.710</z-m>
+  </center>
+  <axis>
+   <x>-1</x>
+   <y>-1</y>
+   <z>0</z>
+  </axis>
+  <power>4</power>
+  <factor>1</factor>
+  <offset>0.4</offset>
+  <two-sides type="bool">false</two-sides>
+  <min>0.01</min>
+  <max>1</max>
+</animation>
+
+
+<!-- Right (green) nav light -->
+
+<animation>
+  <type>select</type>
+  <object-name>LightNavGlowR</object-name>
+  <condition>
+    <property>sim/multiplay/generic/float[0]</property>
+  </condition>
+</animation>
+
+<animation>
+  <type>flash</type>
+  <object-name>LightNavGlowR</object-name>
+  <center>
+   <x-m>-0.920</x-m>
+   <y-m>18.850</y-m>
+   <z-m>1.710</z-m>
+  </center>
+  <axis>
+   <x>-1</x>
+   <y>1</y>
+   <z>0</z>
+  </axis>
+  <power>4</power>
+  <factor>1</factor>
+  <offset>0.4</offset>
+  <two-sides type="bool">false</two-sides>
+  <min>0.01</min>
+  <max>1</max>
+</animation>
+
+
+<!-- Tail Light -->
+
+<animation>
+  <type>select</type>
+  <object-name>LightTailGlow</object-name>
+  <condition>
+    <property>sim/multiplay/generic/float[1]</property>
+  </condition>
+</animation>
+
+<animation>
+  <type>flash</type>
+  <object-name>LightTailGlow</object-name>
+  <center>
+   <x-m>17.700</x-m>
+   <y-m>0</y-m>
+   <z-m>1.713</z-m>
+  </center>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+  <power>2</power>
+  <factor>1</factor>
+  <offset>0.2</offset>
+  <two-sides type="bool">false</two-sides>
+  <min>0.01</min>
+  <max>1</max>
+</animation>
+
+
+<!-- Landing & Taxi Lights -->
+
+<!-- Selections for lights when not extended -->
+
+<animation>
+  <type>select</type>
+  <object-name>LightTaxiGlow</object-name>
+  <condition>
+    <and>
+    <property>sim/multiplay/generic/float[2]</property>
+    <not><property>gear/gear[0]/position-norm</property></not>
+    </and>
+  </condition>
+</animation>
+
+<animation>
+  <type>select</type>
+  <object-name>LightLandingGlowL</object-name>
+  <condition>
+    <and>
+      <property>sim/multiplay/generic/float[3]</property>
+      <not><property>/controls/lighting/landing-extend-left</property></not>
+    </and>
+  </condition>
+</animation>
+
+<animation>
+  <type>select</type>
+  <object-name>LightLandingGlowR</object-name>
+  <condition>
+    <and>
+      <property>sim/multiplay/generic/float[4]</property>
+      <not><property>/controls/lighting/landing-extend-right</property></not>
+    </and>
+  </condition>
+</animation>
+
+<!-- Selections for lights when extended to deployed horizontal positions -->
+
+<animation>
+  <type>select</type>
+  <object-name>LightTaxiGlowH</object-name>
+  <condition>
+    <and>
+    <property>sim/multiplay/generic/float[2]</property>
+    <property>gear/gear[0]/position-norm</property>
+    </and>
+  </condition>
+</animation>
+
+<animation>
+  <type>select</type>
+  <object-name>LightLandingGlowLH</object-name>
+  <condition>
+    <and>
+      <property>sim/multiplay/generic/float[3]</property>
+      <property>sim/multiplay/generic/float[5]</property>
+    </and>
+  </condition>
+</animation>
+
+<animation>
+  <type>select</type>
+  <object-name>LightLandingGlowRH</object-name>
+  <condition>
+    <and>
+      <property>sim/multiplay/generic/float[4]</property>
+      <property>sim/multiplay/generic/float[6]</property>
+    </and>
+  </condition>
+</animation>
+
+<!--
+Flash animations are used to make the landing/taxi lights appear more strongly when
+viewed on-axis. The flash center and actual glow-object centers are positioned to get
+the light to appear smaller and centered on the lamp when viewed off-axis, and to
+appear large and yet not intersect the airframe (which looks bad) when viewed on-axis.
+It's not perfect but I find it works reasonably well. This is largely a trompe-l'oeil
+until I can find a better solution.
+
+When modifying, think of the glow-object as the widest point of the light-cone, and the
+flash center as the point of the cone. The cone point is truncated at the flash <min>
+value, so that a small circle of light appears on the lamp object when viewed off-axis.
+So the cone point (flash center) will actually be somewhat behind the lamp object.
+-->
+
+<animation>
+  <type>flash</type>
+  <object-name>LightTaxiGlow</object-name>
+  <center>
+    <x-m>-14.315</x-m>
+    <y-m>0</y-m>
+    <z-m>-0.8</z-m>
+  </center>
+  <axis>
+    <x>0</x>
+    <y>0</y>
+    <z>-1</z>
+  </axis>
+  <power>5</power>
+  <factor>1</factor>
+  <offset>0</offset>
+  <two-sides type="bool">false</two-sides>
+  <min>0.05</min>
+  <max>1</max>
+</animation>
+
+<animation>
+  <type>flash</type>
+  <object-name>LightLandingGlowL</object-name>
+  <center>
+    <x-m>-1.098</x-m>
+    <y-m>-11.695</y-m>
+    <z-m>0.55</z-m>
+  </center>
+  <axis>
+    <x>0</x>
+    <y>0</y>
+    <z>-1</z>
+  </axis>
+  <power>5</power>
+  <factor>1</factor>
+  <offset>0</offset>
+  <two-sides type="bool">false</two-sides>
+  <min>0.06</min>
+  <max>1</max>
+</animation>
+
+<animation>
+  <type>flash</type>
+  <object-name>LightLandingGlowR</object-name>
+  <center>
+    <x-m>-1.098</x-m>
+    <y-m>11.695</y-m>
+    <z-m>0.55</z-m>
+  </center>
+  <axis>
+    <x>0</x>
+    <y>0</y>
+    <z>-1</z>
+  </axis>
+  <power>5</power>
+  <factor>1</factor>
+  <offset>0</offset>
+  <two-sides type="bool">false</two-sides>
+  <min>0.06</min>
+  <max>1</max>
+</animation>
+
+<animation>
+  <type>flash</type>
+  <object-name>LightTaxiGlowH</object-name>
+  <center>
+    <x-m>-14.857</x-m>
+    <y-m>0</y-m>
+    <z-m>-1.053</z-m>
+  </center>
+  <axis>
+    <x>-1</x>
+    <y>0</y>
+    <z>0</z>
+  </axis>
+  <power>8</power>
+  <factor>1</factor>
+  <offset>0</offset>
+  <two-sides type="bool">false</two-sides>
+  <min>0.05</min>
+  <max>1</max>
+</animation>
+
+<animation>
+  <type>flash</type>
+  <object-name>LightLandingGlowLH</object-name>
+  <center>
+    <x-m>-0.800</x-m>
+    <y-m>-11.695</y-m>
+    <z-m>0.400</z-m>
+  </center>
+  <axis>
+    <x>-1</x>
+    <y>0</y>
+    <z>0</z>
+  </axis>
+  <power>8</power>
+  <factor>1</factor>
+  <offset>0</offset>
+  <two-sides type="bool">false</two-sides>
+  <min>0.06</min>
+  <max>1</max>
+</animation>
+
+<animation>
+  <type>flash</type>
+  <object-name>LightLandingGlowRH</object-name>
+  <center>
+    <x-m>-0.800</x-m>
+    <y-m>11.695</y-m>
+    <z-m>0.400</z-m>
+  </center>
+  <axis>
+    <x>-1</x>
+    <y>0</y>
+    <z></z>
+  </axis>
+  <power>8</power>
+  <factor>1</factor>
+  <offset>0</offset>
+  <two-sides type="bool">false</two-sides>
+  <min>0.06</min>
+  <max>1</max>
+</animation>
+
+</PropertyList>
+

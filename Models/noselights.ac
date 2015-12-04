@@ -1,0 +1,46 @@
+AC3Db
+MATERIAL "Lights" rgb 1 1 1  amb 0 0 0  emis 1 1 1  spec 0 0 0  shi 0  trans 0
+OBJECT world
+kids 2
+OBJECT poly
+name "noselight2"
+loc 28.4375 0.310538 -2.8119
+data 10
+Mesh.11083
+texture "transparent2.png"
+crease 30.000000
+numvert 4
+-21.2936 0.092232 0.5707
+-21.2936 0.0979561 -0.51938
+-21.2939 -1.16631 -0.524315
+-21.2939 -1.17204 0.565768
+numsurf 1
+SURF 0x0
+mat 0
+refs 4
+3 0.5375 0.4625
+0 0.5375 0.0375
+1 0.9625 0.0375
+2 0.9625 0.4625
+kids 0
+OBJECT poly
+name "noselight1"
+loc 28.4271 0.334354 2.80318
+data 10
+Mesh.11083
+texture "transparent2.png"
+crease 30.000000
+numvert 4
+-21.2939 -1.20295 0.519394
+-21.2939 -1.19722 -0.570689
+-21.2936 0.0670398 -0.565754
+-21.2936 0.0613158 0.524326
+numsurf 1
+SURF 0x0
+mat 0
+refs 4
+0 0.5375 0.4625
+3 0.5375 0.0375
+2 0.9625 0.0375
+1 0.9625 0.4625
+kids 0
